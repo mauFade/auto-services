@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { CreateUserResponseDTO, IUser, UserConstructorDTO } from "../dto";
 
 const UserSchema = new Schema({
