@@ -16,7 +16,8 @@
       "@application/*": ["./src/application/*"],
       "@configs/*": ["./src/configs/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "types": ["node", "express"],
+    "typeRoots": ["./src/express.d.ts", "./node_modules/@types"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

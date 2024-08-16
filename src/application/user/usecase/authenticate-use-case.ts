@@ -51,7 +51,6 @@ export class AuthenticateUseCase {
       {
         user: {
           id: user.getId(),
-          name: user.getName(),
           email: user.getEmail(),
         },
         tokenValidator,
