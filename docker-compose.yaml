@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  node:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT:-33333}:${APP_PORT:-33333}"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+    # command: ts-node-dev -r tsconfig-paths/register --inspect -T src/infra/cmd/index.ts
+
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - ${DB_PORT:-27017}:${DB_PORT:-27017}
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
