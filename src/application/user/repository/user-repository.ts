@@ -1,5 +1,5 @@
-import { CreateUserResponseDTO } from "../dto";
-import { IUser, IUserRepository, UserModel } from "../model/user";
+import { CreateUserResponseDTO, IUser } from "../dto";
+import { IUserRepository, User, UserModel } from "../model/user";
 
 export class UserRepository implements IUserRepository {
   private userModel: typeof UserModel;
@@ -26,15 +26,29 @@ export class UserRepository implements IUserRepository {
     };
   }
 
-  public async findById(id: string): Promise<IUser | null> {
+  public async findById(id: string): Promise<User | undefined> {
     const result = await this.userModel.findOne({ _id: new Object(id) });
 
-    return result;
+    if (!result) return undefined;
+
+    return User.newUser({
+      id: result._id.toString(),
+      name: result.name,
+      email: result.email,
+      password: result.password,
+    });
   }
 
-  public async findByEmail(email: string): Promise<IUser | null> {
+  public async findByEmail(email: string): Promise<User | undefined> {
     const result = await this.userModel.findOne({ email });
 
-    return result;
+    if (!result) return undefined;
+
+    return User.newUser({
+      id: result._id.toString(),
+      name: result.name,
+      email: result.email,
+      password: result.password,
+    });
   }
 }
