@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { CreateUserResponseDTO, IUser } from "../dto";
 import { IUserRepository, User, UserModel } from "../model/user";
 
@@ -27,7 +28,9 @@ export class UserRepository implements IUserRepository {
   }
 
   public async findById(id: string): Promise<User | undefined> {
-    const result = await this.userModel.findOne({ _id: new Object(id) });
+    const result = await this.userModel.findOne({
+      _id: new mongoose.Types.ObjectId(id),
+    });
 
     if (!result) return undefined;
 
