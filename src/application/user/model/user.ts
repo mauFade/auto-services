@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { CreateUserResponseDTO } from "../dto";
 
 export interface IUser {
   name: string;
@@ -15,7 +16,7 @@ const UserSchema = new Schema({
 export const UserModel = mongoose.model("User", UserSchema);
 
 export interface IUserRepository {
-  create(data: IUser): Promise<void>;
+  create(data: IUser): Promise<CreateUserResponseDTO>;
   findById(id: string): Promise<IUser | null>;
   findByEmail(email: string): Promise<IUser | null>;
 }
