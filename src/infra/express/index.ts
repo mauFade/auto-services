@@ -19,6 +19,7 @@ export class ExpressServer {
     this.config();
     this.handlers();
     this.handleParseErrors();
+    this.handleGlobalErrors();
   }
 
   private config(): void {
@@ -27,11 +28,25 @@ export class ExpressServer {
         origin: "*",
       })
     );
+    this._express.use(express.json());
     this._express.use(express.urlencoded({ extended: true }));
   }
 
   private handlers(): void {
     this._express.use(appRoutes);
+  }
+
+  private handleGlobalErrors(): void {
+    this._express.use(
+      (
+        err: Error,
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+      ) => {
+        res.status(400).json({ error: err.message });
+      }
+    );
   }
 
   private handleParseErrors(): void {
