@@ -1,3 +1,4 @@
+import { NotFoundError } from "@application/@shared/errors";
 import { IServiceRepository } from "../model/service";
 
 interface RequestDTO {
@@ -16,6 +17,10 @@ export class DeleteServiceUseCase {
   }
 
   public async execute(data: RequestDTO): Promise<void> {
-    await this.serviceRepository.delete(data.id);
+    const service = await this.serviceRepository.findById(data.id);
+
+    if (!service) throw new NotFoundError("Service not found with this id");
+
+    await this.serviceRepository.delete(service.getId());
   }
 }

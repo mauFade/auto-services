@@ -1,3 +1,4 @@
+import { AuthenticateError } from "@application/@shared/errors";
 import { CelebrateError, Joi } from "celebrate";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
@@ -33,7 +34,7 @@ export async function verifyAuth(
       !token ||
       token.split(".").length !== 3
     ) {
-      throw new Error("The custom token format is incorrect.");
+      throw new AuthenticateError("The custom token format is incorrect.");
     }
 
     if (error) {
@@ -52,7 +53,7 @@ export async function verifyAuth(
     return next();
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
-      throw new Error("This token is expired, login again");
+      throw new AuthenticateError("This token is expired, login again");
     }
 
     throw error;

@@ -1,9 +1,3 @@
-interface ErrorInterface extends Error {
-  type: string;
-  status: number;
-  message: string;
-}
-
 export class NotFoundError extends Error {
   public type: string;
   public status: number;
@@ -28,7 +22,7 @@ export class BadRequestError extends Error {
   }
 }
 
-export class AlreadyExist extends Error {
+export class AlreadyExistError extends Error {
   public type: string;
   public status: number;
   constructor(message: string) {

@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 import { IBCryptRepository } from "@infra/bcrypt/model";
 import { IUserRepository } from "../model/user";
+import { AuthenticateError } from "@application/@shared/errors";
 
 interface RequestDTO {
   email: string;
@@ -36,14 +37,14 @@ export class AuthenticateUseCase {
   public async execute(data: RequestDTO): Promise<ResponseDTO> {
     const user = await this.userRepository.findByEmail(data.email);
 
-    if (!user) throw new Error("User not found with this id");
+    if (!user) throw new AuthenticateError("Email not found");
 
     const isValidPassword = await this.bCryptAdapter.compare(
       data.password,
       user.getPassword()
     );
 
-    if (!isValidPassword) throw new Error("Invalid password");
+    if (!isValidPassword) throw new AuthenticateError("Invalid password");
 
     const tokenValidator = await this.bCryptAdapter.create("authentication");
 

@@ -1,3 +1,4 @@
+import { NotFoundError } from "@application/@shared/errors";
 import { IServiceRepository, Service } from "../model/service";
 
 interface RequestDTO {
@@ -24,7 +25,7 @@ export class UpdateServiceUseCase {
   public async execute(data: RequestDTO): Promise<Service> {
     const service = await this.serviceRepository.findById(data.id);
 
-    if (!service) throw new Error("Service not found with this id");
+    if (!service) throw new NotFoundError("Service not found with this id");
 
     this.updateData(service, data);
 

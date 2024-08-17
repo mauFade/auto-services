@@ -1,6 +1,10 @@
 import { IBCryptRepository } from "@infra/bcrypt/model";
 import { IUserRepository } from "../model/user";
 import { CreateUserResponseDTO } from "../dto";
+import {
+  AlreadyExistError,
+  ValidationError,
+} from "@application/@shared/errors";
 
 interface CreateUserDTO {
   name: string;
@@ -30,12 +34,12 @@ export class CreateUserUseCase {
   public async execute(data: CreateUserDTO): Promise<CreateUserResponseDTO> {
     const userExists = await this.userRepository.findByEmail(data.email);
 
-    if (userExists) throw new Error("User already exists");
+    if (userExists) throw new AlreadyExistError("User already exists");
 
     const isValidEmail =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(data.email);
 
-    if (!isValidEmail) throw new Error("Invalid email.");
+    if (!isValidEmail) throw new ValidationError("Invalid email.");
 
     const hashPass = await this.bCryptAdapter.create(data.password);
 
