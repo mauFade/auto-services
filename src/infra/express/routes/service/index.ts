@@ -1,15 +1,20 @@
 import { CreateServiceController } from "@application/service/controller/create-service-controller";
 import { DeleteServiceController } from "@application/service/controller/delete-service-controller";
+import { ListServiceController } from "@application/service/controller/list-service-controller";
 import { UpdateServiceController } from "@application/service/controller/update-service-controller";
 import { verifyAuth } from "@infra/express/middlewares";
 import { Router } from "express";
 
 const serviceRoutes = Router();
 
-serviceRoutes.post("/", verifyAuth, CreateServiceController.handle);
+serviceRoutes.use(verifyAuth);
 
-serviceRoutes.put("/", verifyAuth, UpdateServiceController.handle);
+serviceRoutes.post("/", CreateServiceController.handle);
 
-serviceRoutes.delete("/", verifyAuth, DeleteServiceController.handle);
+serviceRoutes.get("/", ListServiceController.handle);
+
+serviceRoutes.put("/", UpdateServiceController.handle);
+
+serviceRoutes.delete("/", DeleteServiceController.handle);
 
 export { serviceRoutes };
