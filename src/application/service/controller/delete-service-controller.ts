@@ -3,12 +3,12 @@ import { deleteServiceFactory } from "../factory/delete-service-factory";
 
 export class DeleteServiceController {
   static async handle(request: Request, response: Response): Promise<Response> {
-    const { serviceId } = request.query;
+    const { serviceId } = request.params;
 
     const useCase = deleteServiceFactory();
 
     await useCase.execute({
-      id: String(serviceId),
+      id: serviceId,
     });
 
     return response.status(204).json();

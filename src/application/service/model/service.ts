@@ -91,6 +91,8 @@ export class Service {
 export interface IServiceRepository {
   create(data: IService): Promise<Service>;
   findById(id: string): Promise<Service | undefined>;
+  findByUserId(id: string): Promise<Service[]>;
+  findByVehicleId(id: string): Promise<Service[]>;
   listAll(): Promise<Service[]>;
   update(service: Service): Promise<void>;
   delete(id: string): Promise<void>;

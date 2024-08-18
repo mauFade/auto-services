@@ -36,6 +36,42 @@ export class ServiceRepository implements IServiceRepository {
     });
   }
 
+  public async findByUserId(id: string): Promise<Service[]> {
+    const result = await this.serviceModel.find({
+      userId: id,
+    });
+
+    return result.map((r) => {
+      return Service.newService({
+        id: r._id.toString(),
+        description: r.description,
+        date: r.date,
+        vehicleId: r.vehicleId,
+        userId: r.userId,
+        status: r.status,
+        value: r.value,
+      });
+    });
+  }
+
+  public async findByVehicleId(id: string): Promise<Service[]> {
+    const result = await this.serviceModel.find({
+      vehicleId: id,
+    });
+
+    return result.map((r) => {
+      return Service.newService({
+        id: r._id.toString(),
+        description: r.description,
+        date: r.date,
+        vehicleId: r.vehicleId,
+        userId: r.userId,
+        status: r.status,
+        value: r.value,
+      });
+    });
+  }
+
   public async findById(id: string): Promise<Service | undefined> {
     const result = await this.serviceModel.findOne({
       _id: new mongoose.Types.ObjectId(id),
