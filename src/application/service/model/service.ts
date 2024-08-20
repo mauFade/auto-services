@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IService, ServiceContructorDTO } from "../dto";
+import { Vehicle } from "@application/vehicle/model/vehicle";
 
 const ServiceSchema = new Schema({
   description: { type: String, required: true },
@@ -20,6 +21,7 @@ export class Service {
   private userId: string;
   private status: string;
   private value: number;
+  private vehicle: Vehicle | null;
 
   private constructor(data: ServiceContructorDTO) {
     this.id = data.id;
@@ -29,6 +31,8 @@ export class Service {
     this.userId = data.userId;
     this.status = data.status;
     this.value = data.value;
+
+    this.vehicle = null;
   }
 
   public static newService(data: ServiceContructorDTO): Service {
@@ -85,6 +89,14 @@ export class Service {
 
   public setValue(value: number): void {
     this.value = value;
+  }
+
+  public setVehicle(v: Vehicle): void {
+    this.vehicle = v;
+  }
+
+  public getVehicle(): Vehicle | null {
+    return this.vehicle;
   }
 }
 
