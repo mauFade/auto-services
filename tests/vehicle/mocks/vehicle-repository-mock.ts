@@ -19,7 +19,11 @@ export class VehicleRepositoryMock implements IVehicleRepository {
     return v;
   }
 
-  public async findById(_id: string): Promise<Vehicle | undefined> {
-    return Vehicle.newVehicle({ id: "123", name: "test", userId: "test" });
+  public async findById(id: string): Promise<Vehicle | undefined> {
+    const vehicles: Vehicle[] = [
+      Vehicle.newVehicle({ id: "123", name: "test", userId: "test" }),
+    ];
+
+    return vehicles.find((v) => v.getId() === id);
   }
 }
