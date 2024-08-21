@@ -1,16 +1,16 @@
 version: "3.8"
 
 services:
-  # node:
-  #   build: .
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - "${APP_PORT:-33333}:${APP_PORT:-33333}"
-  #   volumes:
-  #     - .:/usr/src/app
-  #   depends_on:
-  #     - mongo
+  node:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT:-33333}:${APP_PORT:-33333}"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:5.0
