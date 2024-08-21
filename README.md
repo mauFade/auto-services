@@ -2,7 +2,7 @@
 
 # É necessário ter o docker instalado e rodando para conseguir usar esse projeto
 
-## Clone o arquivo .env.example e clone o mesmo, mas com o nome de .env, caso contrário a aplicação não inciará.
+## Clone o arquivo `.env.example`, mas com o nome de `.env`, o `.env.example` tem todas as variáveis de ambiente necessárias, mas o app roda com o `.env`, caso contrário, a aplicação não inciará.
 
 ## Para rodar o app, rode o comando ´docker compose up --build´
 
