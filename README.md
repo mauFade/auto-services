@@ -2,6 +2,8 @@
 
 # É necessário ter o docker instalado e rodando para conseguir usar esse projeto
 
+## Clone o arquivo .env.example e clone o mesmo, mas com o nome de .env, caso contrário a aplicação não inciará.
+
 ## Para rodar o app, rode o comando ´docker compose up --build´
 
 Esse comando irá buildar um banco de dados MongoDB e de pois a aplicação NodeJs, os testes unitários são rodados automaticamente.
@@ -58,7 +60,7 @@ O corpo da requisição deve ser um JSON com os seguintes campos:
 
 #### POST `/v1/users/auth`
 
-Endpoint para gerar o token jwt que é requirido em TODOS os outros endpoints, pegue o item "token" do corpo da resposta e passe no Auhtorization Bearer Token. No Insomnia você pode setar o mesmo nas variaveis de ambiente. O token dura 24hrs.
+Endpoint para gerar o token jwt que é requirido em TODOS os outros endpoints, pegue o item "token" do corpo da resposta e passe no Authorization Bearer Token. No Insomnia você pode setar o mesmo nas variaveis de ambiente. O token dura 24hrs.
 
 O corpo da requisição deve ser um JSON com os seguintes campos:
 
@@ -78,10 +80,8 @@ O corpo da requisição deve ser um JSON com os seguintes campos:
 
 ```json
 {
-  {
-	"id": "iddousuario",
-	"name": "johndoe",
-	"token": "tokenjwtgeradopeloservice"
-}
+  "id": "iddousuario",
+  "name": "johndoe",
+  "token": "tokenjwtgeradopeloservice"
 }
 ```
