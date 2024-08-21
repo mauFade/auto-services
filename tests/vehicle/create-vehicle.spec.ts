@@ -1,7 +1,8 @@
-import { test, expect, it, describe } from "vitest";
+import { test, expect, describe } from "vitest";
 import { VehicleRepositoryMock } from "./mocks/vehicle-repository-mock";
 import { CreateVehicleUseCase } from "../../src/application/vehicle/usecase/create-vehicle-use-case";
 import { Vehicle } from "../../src/application/vehicle/model/vehicle";
+
 const mockRepo = new VehicleRepositoryMock();
 
 const uc = CreateVehicleUseCase.getInstance(mockRepo);
