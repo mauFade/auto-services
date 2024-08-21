@@ -85,3 +85,72 @@ O corpo da requisição deve ser um JSON com os seguintes campos:
   "token": "tokenjwtgeradopeloservice"
 }
 ```
+
+#### POST `/v1/services`
+
+Endpoint para fazer o registro de um serviço no sistema, é necessário passar um token válido retornado pelo `/v1/users/auth` no Bearer Token.
+
+O corpo da requisição deve ser um JSON com os seguintes campos:
+
+- `description` (string, obrigatório): Descrição do serviço.
+- `date` (Date, obrigatório): Data do serviço.
+- `vehicleId` (string, obrigatório): Id do veículo.
+- `status` (string, obrigatório): Status do serviço.
+- `value` (number, obrigatório): Preço do serviço.
+
+##### Exemplo de Request
+
+```json
+{
+  "description": "Serviço completo",
+  "date": "08-16-2024",
+  "vehicleId": "66c53cc9db1f8784b346fe69",
+  "status": "todo",
+  "value": 1000
+}
+```
+
+##### Resposta
+
+```json
+{
+  "id": "66c53cd0db1f8784b346fe6c",
+  "description": "Serviço completo",
+  "date": "2024-08-16T00:00:00.000Z",
+  "vehicleId": "66c53cc9db1f8784b346fe69",
+  "userId": "66c5399cdb1f8784b346fe65",
+  "status": "todo",
+  "value": 1000,
+  "vehicle": {
+    "id": "66c53cc9db1f8784b346fe69",
+    "name": "Nissan Skyline R34",
+    "userId": "66c5399cdb1f8784b346fe65"
+  }
+}
+```
+
+#### POST `/v1/vehicles`
+
+Endpoint para fazer o registro de um veículo para o usuário, é necessário passar um token válido retornado pelo `/v1/users/auth` no Bearer Token.
+
+O corpo da requisição deve ser um JSON com os seguintes campos:
+
+- `name` (string, obrigatório): Nome do veículo.
+
+##### Exemplo de Request
+
+```json
+{
+  "name": "Nissan Skyline R34"
+}
+```
+
+##### Resposta
+
+```json
+{
+  "id": "66c53cc9db1f8784b346fe69",
+  "name": "Nissan Skyline R34",
+  "userId": "66c5399cdb1f8784b346fe65"
+}
+```
