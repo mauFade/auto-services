@@ -1,7 +1,6 @@
 {
   "name": "auto-services",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -37,7 +36,7 @@
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
-    "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.0.5"
+    "vite-tsconfig-paths": "4.2.0",
+    "vitest": "0.30.1"
   }
 }
